@@ -18,6 +18,17 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 export default function Index() {
+
+    const [mapSrc, setMapSrc] = React.useState("")
+    const [address, setAddress] = React.useState("")
+    const googlemap = `https://maps.google.com/maps?q=${address}&t=&z=11&ie=UTF8&iwloc=B&output=embed`
+    setMapSrc(googlemap)
+
+    const HandleOnchange=(e)=>{
+           setAddress(e.target.value)
+    }
+    
+
     return (
         <>
             <CssBaseline />
@@ -26,6 +37,7 @@ export default function Index() {
                     <TextField
                         style={{ width: "70%", margin: "30px" }}
                         placeholder="Search Here...."
+                        onChange={HandleOnchange}
                         InputProps={{
                             endAdornment: <Button variant='contained' style={{ height: "54px", position: "relative", left: "15px" }}>Search</Button>
                         }}
@@ -34,7 +46,17 @@ export default function Index() {
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} lg={12} sx={12} md={12}>
-                            <Item>xs=8</Item>
+                            <Item>
+                                <iframe
+                                    width="100%"
+                                    height="600"
+                                    frameborder="0"
+                                    scrolling="no"
+                                    marginheight="0"
+                                    marginwidth="0"
+                                    src={mapSrc}
+                                ></iframe>
+                            </Item>
                         </Grid>
                     </Grid>
                 </Box>
